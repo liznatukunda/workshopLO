@@ -59,7 +59,7 @@ public class Account implements Serializable {
             }
         }
     }
-    
+    // comment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
