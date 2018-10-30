@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package resources;
+package sessions;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
  *
- * @author LIZ
+ * @author liz20
  */
 public abstract class AbstractFacade<T> {
 
-    Class<T> entityClass;
+    private Class<T> entityClass;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;

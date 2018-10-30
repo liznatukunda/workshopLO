@@ -6,13 +6,8 @@
 package resources;
 
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Root;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import sessions.AccountFacade;
 import workshop3lo.domain.Account;
 
 /**
@@ -29,74 +25,69 @@ import workshop3lo.domain.Account;
  * @author LIZ
  */
 @Stateless
-@Path("workshop3lo.domain.account")
-public class AccountFacadeREST extends AbstractFacade<Account> {
+@Path("account")
+public class AccountFacadeREST  {
 
-    @PersistenceContext(unitName = "workshop3LO_workshop3LO_war_1.0-SNAPSHOTPU")
-    private EntityManager em;
+    @EJB
+    private AccountFacade dao;
+ 
 
     public AccountFacadeREST() {
-        super(Account.class);
+       
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Account entity) {
-        super.create(entity);
+        dao.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Account entity) {
-        super.edit(entity);
+        dao.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+        dao.remove(dao.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Account find(@PathParam("id") Integer id) {
-        return super.find(id);
+        return dao.find(id);
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> findAll() {
-        return super.findAll();
+        return dao.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+        return dao.findRange(new int[]{from, to});
     }
 
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
-        return String.valueOf(super.count());
+        return String.valueOf(dao.count());
     }
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     @GET
     @Path("search/{naam}")
     @Produces({MediaType.APPLICATION_JSON})
     public Account findByUserName(@PathParam("naam") String naam) {
-        return findByName(naam);
+        return dao.findByName(naam);
     }
 
 //    @GET
@@ -106,18 +97,7 @@ public class AccountFacadeREST extends AbstractFacade<Account> {
 //        return getKlantAccountsZonderKlantQuery();
 //    }
 
-    public Account findByName(String naam) {
-        // select * from account where name = ?
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Account> query = cb.createQuery(Account.class);
-        Root<Account> root = query.from(Account.class);
-        query = query.select(root).where(cb.equal(root.get("username"), naam));
-        try {
-            return em.createQuery(query).getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
+
 
  //   public List<Account> getKlantAccountsZonderKlantQuery() {
 //

@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Adres.findByToevoeging", query = "SELECT a FROM Adres a WHERE a.toevoeging = :toevoeging")
     , @NamedQuery(name = "Adres.findByPostcode", query = "SELECT a FROM Adres a WHERE a.postcode = :postcode")
     , @NamedQuery(name = "Adres.findByWoonplaats", query = "SELECT a FROM Adres a WHERE a.woonplaats = :woonplaats")
-    , @NamedQuery(name = "Adres.findByAdrestype", query = "SELECT a FROM Adres a WHERE a.adrestype = :adrestype")})
+   /* , @NamedQuery(name = "Adres.findByAdrestype", query = "SELECT a FROM Adres a WHERE a.adrestype = :adrestype")*/})
 public class Adres implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -81,10 +81,10 @@ public class Adres implements Serializable {
     @Size(max = 45)
     @Column(name = "woonplaats")
     private String woonplaats;
-    @Enumerated(EnumType.STRING)
-    @Size(max = 15)
-    @Column(name = "Adrestype")
-    private AdresType adrestype;
+//    @Enumerated(EnumType.STRING)
+//    @Size(max = 15)
+//    @Column(name = "Adrestype")
+//    private AdresType adrestype;
     @JoinColumn(name = "Klant_idKlant", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Klant klantidKlant;
@@ -150,15 +150,15 @@ public class Adres implements Serializable {
         this.woonplaats = woonplaats;
     }
 
-    @XmlTransient
-    @JsonbTransient
-    public AdresType getAdrestype() {
-        return adrestype;
-    }
-
-    public void setAdrestype(AdresType adrestype) {
-        this.adrestype = adrestype;
-    }
+//    @XmlTransient
+//    @JsonbTransient
+//    public AdresType getAdrestype() {
+//        return adrestype;
+//    }
+//
+//    public void setAdrestype(AdresType adrestype) {
+//        this.adrestype = adrestype;
+//    }
 
     @JsonbProperty("klantidKlant")
     public Klant getKlantidKlant() {
