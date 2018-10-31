@@ -13,6 +13,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,18 +47,23 @@ public class Klant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
+    @JsonbProperty("id ")
     private Integer id;
     @Size(max = 45)
     @Column(name = "voornaam")
+    @JsonbProperty("voornaam ")
     private String voornaam;
     @Size(max = 45)
     @Column(name = "tussenvoegsel")
+    @JsonbProperty("tussenvoegsel ")
     private String tussenvoegsel;
     @Size(max = 45)
     @Column(name = "achternaam")
+    @JsonbProperty("achternaam ")
     private String achternaam;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonbProperty("accountId ")
     private Account accountId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "klantidKlant")
     private Collection<Bestelling> bestellingCollection;
@@ -71,7 +77,6 @@ public class Klant implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty("id ")
     public Integer getId() {
         return id;
     }
@@ -80,7 +85,6 @@ public class Klant implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty("voornaam ")
     public String getVoornaam() {
         return voornaam;
     }
@@ -89,7 +93,6 @@ public class Klant implements Serializable {
         this.voornaam = voornaam;
     }
 
-    @JsonbProperty("tussenvoegsel ")
     public String getTussenvoegsel() {
         return tussenvoegsel;
     }
@@ -98,7 +101,6 @@ public class Klant implements Serializable {
         this.tussenvoegsel = tussenvoegsel;
     }
 
-    @JsonbProperty("achternaam ")
     public String getAchternaam() {
         return achternaam;
     }
@@ -107,7 +109,6 @@ public class Klant implements Serializable {
         this.achternaam = achternaam;
     }
 
-    @JsonbProperty("accountId ")
     public Account getAccountId() {
         return accountId;
     }

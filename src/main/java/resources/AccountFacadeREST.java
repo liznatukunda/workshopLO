@@ -86,7 +86,7 @@ public class AccountFacadeREST  {
     @GET
     @Path("search/{naam}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Account findByUserName(@PathParam("naam") String naam) {
+    public Account findByName(@PathParam("naam") String naam) {
         return dao.findByName(naam);
     }
 

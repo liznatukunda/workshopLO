@@ -7,12 +7,9 @@ package workshop3lo.domain;
 
 import java.io.Serializable;
 import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Adres.findByToevoeging", query = "SELECT a FROM Adres a WHERE a.toevoeging = :toevoeging")
     , @NamedQuery(name = "Adres.findByPostcode", query = "SELECT a FROM Adres a WHERE a.postcode = :postcode")
     , @NamedQuery(name = "Adres.findByWoonplaats", query = "SELECT a FROM Adres a WHERE a.woonplaats = :woonplaats")
-   /* , @NamedQuery(name = "Adres.findByAdrestype", query = "SELECT a FROM Adres a WHERE a.adrestype = :adrestype")*/})
+/* , @NamedQuery(name = "Adres.findByAdrestype", query = "SELECT a FROM Adres a WHERE a.adrestype = :adrestype")*/
+})
 public class Adres implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,21 +62,27 @@ public class Adres implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
+    @JsonbProperty("id ")
     private Integer id;
     @Size(max = 45)
     @Column(name = "straatnaam")
+    @JsonbProperty("straatnaam")
     private String straatnaam;
     @Size(max = 45)
     @Column(name = "huisnummer")
+    @JsonbProperty("huisnummer")
     private String huisnummer;
     @Size(max = 45)
     @Column(name = "toevoeging")
+    @JsonbProperty("toevoeging")
     private String toevoeging;
     @Size(max = 45)
     @Column(name = "postcode")
+    @JsonbProperty("postcode")
     private String postcode;
     @Size(max = 45)
     @Column(name = "woonplaats")
+    @JsonbProperty("woonplaats")
     private String woonplaats;
 //    @Enumerated(EnumType.STRING)
 //    @Size(max = 15)
@@ -96,7 +99,6 @@ public class Adres implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty("id ")
     public Integer getId() {
         return id;
     }
@@ -105,7 +107,6 @@ public class Adres implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty("straatnaam")
     public String getStraatnaam() {
         return straatnaam;
     }
@@ -114,7 +115,6 @@ public class Adres implements Serializable {
         this.straatnaam = straatnaam;
     }
 
-    @JsonbProperty("huisnummer")
     public String getHuisnummer() {
         return huisnummer;
     }
@@ -123,7 +123,6 @@ public class Adres implements Serializable {
         this.huisnummer = huisnummer;
     }
 
-    @JsonbProperty("toevoeging")
     public String getToevoeging() {
         return toevoeging;
     }
@@ -132,7 +131,6 @@ public class Adres implements Serializable {
         this.toevoeging = toevoeging;
     }
 
-    @JsonbProperty("postcode")
     public String getPostcode() {
         return postcode;
     }
@@ -141,7 +139,6 @@ public class Adres implements Serializable {
         this.postcode = postcode;
     }
 
-    @JsonbProperty("woonplaats")
     public String getWoonplaats() {
         return woonplaats;
     }
@@ -159,7 +156,6 @@ public class Adres implements Serializable {
 //    public void setAdrestype(AdresType adrestype) {
 //        this.adrestype = adrestype;
 //    }
-
     @JsonbProperty("klantidKlant")
     public Klant getKlantidKlant() {
         return klantidKlant;

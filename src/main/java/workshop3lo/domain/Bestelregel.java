@@ -40,17 +40,22 @@ public class Bestelregel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
+    @JsonbProperty("id ")
     private Integer id;
     @Column(name = "aantal")
+    @JsonbProperty("aantal ")
     private Integer aantal;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "prijs")
+    @JsonbProperty("prijs ")
     private BigDecimal prijs;
-    @JoinColumn(name = "Artikel_idArtikel", referencedColumnName = "id")
+    @JoinColumn(name = "Artikel_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonbProperty("artikelidArtikel ")
     private Artikel artikelidArtikel;
-    @JoinColumn(name = "Bestelling_idBestelling", referencedColumnName = "id")
+    @JoinColumn(name = "Bestelling_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonbProperty("bestellingidBestelling ")
     private Bestelling bestellingidBestelling;
 
     public Bestelregel() {
@@ -60,7 +65,6 @@ public class Bestelregel implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty("id ")
     public Integer getId() {
         return id;
     }
@@ -69,7 +73,6 @@ public class Bestelregel implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty("aantal ")
     public Integer getAantal() {
         return aantal;
     }
@@ -78,7 +81,6 @@ public class Bestelregel implements Serializable {
         this.aantal = aantal;
     }
 
-    @JsonbProperty("prijs ")
     public BigDecimal getPrijs() {
         return prijs;
     }
@@ -87,7 +89,6 @@ public class Bestelregel implements Serializable {
         this.prijs = prijs;
     }
 
-    @JsonbProperty("artikelidArtikel ")
     public Artikel getArtikelidArtikel() {
         return artikelidArtikel;
     }
@@ -96,7 +97,7 @@ public class Bestelregel implements Serializable {
         this.artikelidArtikel = artikelidArtikel;
     }
 
-    @JsonbProperty("bestellingidBestelling ")
+    
     public Bestelling getBestellingidBestelling() {
         return bestellingidBestelling;
     }

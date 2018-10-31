@@ -15,6 +15,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,16 +65,20 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
+        @JsonbProperty ("id ")
     private Integer id;
     @Size(max = 45)
     @Column(name = "username")
+     @JsonbProperty ("username ")
     private String username;
     @Size(max = 60)
     @Column(name = "password")
+    @JsonbProperty ("password ")
     private String password;
     @Size(max = 10)
     @Column(name = "rol")
     @Enumerated(EnumType.STRING)
+    @JsonbProperty ("Rol")
     private Rol rol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
     private Collection<Klant> klantCollection;
@@ -85,7 +90,7 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty ("id ")
+
     public Integer getId() {
         return id;
     }
@@ -93,7 +98,7 @@ public class Account implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
- @JsonbProperty ("username ")
+
     public String getUsername() {
         return username;
     }
@@ -101,7 +106,7 @@ public class Account implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
- @JsonbProperty ("password ")
+ 
     public String getPassword() {
         return password;
     }
@@ -109,7 +114,7 @@ public class Account implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    @JsonbTransient
+    
     public Rol getRol() {
         return rol;
     }

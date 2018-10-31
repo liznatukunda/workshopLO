@@ -44,14 +44,17 @@ public class Bestelling implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
+    @JsonbProperty("id ")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "totaalprijs")
+    @Column(name = "prijs")
+    @JsonbProperty("prijs ")
     private BigDecimal totaalprijs;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bestellingidBestelling")
     private Collection<Bestelregel> bestelregelCollection;
-    @JoinColumn(name = "Klant_idKlant", referencedColumnName = "id")
+    @JoinColumn(name = "Klant_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonbProperty("klantidKlant ")
     private Klant klantidKlant;
 
     public Bestelling() {
@@ -61,7 +64,6 @@ public class Bestelling implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty("id ")
     public Integer getId() {
         return id;
     }
@@ -70,7 +72,6 @@ public class Bestelling implements Serializable {
         this.id = id;
     }
 
-    @JsonbProperty("totaalprijs ")
     public BigDecimal getTotaalprijs() {
         return totaalprijs;
     }
@@ -80,7 +81,7 @@ public class Bestelling implements Serializable {
     }
 
     @XmlTransient
-    @JsonbTransient 
+    @JsonbTransient
     public Collection<Bestelregel> getBestelregelCollection() {
         return bestelregelCollection;
     }
@@ -89,7 +90,6 @@ public class Bestelling implements Serializable {
         this.bestelregelCollection = bestelregelCollection;
     }
 
-    @JsonbProperty("klantidKlant ")
     public Klant getKlantidKlant() {
         return klantidKlant;
     }
