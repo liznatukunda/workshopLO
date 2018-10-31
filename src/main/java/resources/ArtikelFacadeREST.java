@@ -83,5 +83,10 @@ public class ArtikelFacadeREST {
     public String countREST() {
         return String.valueOf(dao.count());
     }
-
+@GET
+    @Path("search/{naam}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Artikel findByName(@PathParam("naam") String naam) {
+        return dao.findByNaam(naam);
+    }
 }
