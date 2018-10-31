@@ -14,6 +14,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,10 +51,10 @@ public class Bestelling implements Serializable {
     @Column(name = "prijs")
     @JsonbProperty("prijs ")
     private BigDecimal totaalprijs;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bestellingidBestelling")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "bestellingidBestelling")
     private Collection<Bestelregel> bestelregelCollection;
     @JoinColumn(name = "Klant_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JsonbProperty("klantidKlant ")
     private Klant klantidKlant;
 

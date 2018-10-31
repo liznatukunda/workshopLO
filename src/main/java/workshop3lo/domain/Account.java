@@ -80,7 +80,7 @@ public class Account implements Serializable {
     @Enumerated(EnumType.STRING)
     @JsonbProperty ("Rol")
     private Rol rol;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "accountId")
     private Collection<Klant> klantCollection;
 
     public Account() {

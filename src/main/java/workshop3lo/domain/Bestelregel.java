@@ -11,6 +11,7 @@ import javax.json.bind.annotation.JsonbProperty;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,11 +51,11 @@ public class Bestelregel implements Serializable {
     @JsonbProperty("prijs ")
     private BigDecimal prijs;
     @JoinColumn(name = "Artikel_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JsonbProperty("artikelidArtikel ")
     private Artikel artikelidArtikel;
     @JoinColumn(name = "Bestelling_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JsonbProperty("bestellingidBestelling ")
     private Bestelling bestellingidBestelling;
 

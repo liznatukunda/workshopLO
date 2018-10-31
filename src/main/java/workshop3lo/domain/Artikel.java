@@ -14,6 +14,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +59,7 @@ public class Artikel implements Serializable {
     @Column(name = "voorraad")
     @JsonbProperty("voorraad ")
     private Integer voorraad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "artikelidArtikel")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "artikelidArtikel")
     private Collection<Bestelregel> bestelregelCollection;
 
     public Artikel() {

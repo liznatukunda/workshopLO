@@ -62,12 +62,12 @@ public class Klant implements Serializable {
     @JsonbProperty("achternaam ")
     private String achternaam;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JsonbProperty("accountId ")
     private Account accountId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "klantidKlant")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "klantidKlant")
     private Collection<Bestelling> bestellingCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "klantidKlant")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "klantidKlant")
     private Collection<Adres> adresCollection;
 
     public Klant() {
