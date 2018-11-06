@@ -65,17 +65,17 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-        @JsonbProperty ("id ")
+        @JsonbProperty ("id")
     private Integer id;
     @Size(max = 45)
     @Column(name = "username")
-     @JsonbProperty ("username ")
+     @JsonbProperty ("username")
     private String username;
     @Size(max = 60)
     @Column(name = "password")
-    @JsonbProperty ("password ")
+    @JsonbProperty ("password")
     private String password;
-    @Size(max = 10)
+//    @Size(max = 10)
     @Column(name = "rol")
     @Enumerated(EnumType.STRING)
     @JsonbProperty ("Rol")

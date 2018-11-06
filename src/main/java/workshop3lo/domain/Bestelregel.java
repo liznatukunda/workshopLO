@@ -41,22 +41,22 @@ public class Bestelregel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    @JsonbProperty("id ")
+    @JsonbProperty("id")
     private Integer id;
     @Column(name = "aantal")
-    @JsonbProperty("aantal ")
+    @JsonbProperty("aantal")
     private Integer aantal;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "prijs")
-    @JsonbProperty("prijs ")
+    @JsonbProperty("prijs")
     private BigDecimal prijs;
     @JoinColumn(name = "Artikel_id", referencedColumnName = "id")
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
-    @JsonbProperty("artikelidArtikel ")
+    @JsonbProperty("artikelidArtikel")
     private Artikel artikelidArtikel;
     @JoinColumn(name = "Bestelling_id", referencedColumnName = "id")
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
-    @JsonbProperty("bestellingidBestelling ")
+    @JsonbProperty("bestellingidBestelling")
     private Bestelling bestellingidBestelling;
 
     public Bestelregel() {

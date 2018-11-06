@@ -45,17 +45,17 @@ public class Bestelling implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    @JsonbProperty("id ")
+    @JsonbProperty("id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "prijs")
-    @JsonbProperty("prijs ")
+    @JsonbProperty("prijs")
     private BigDecimal totaalprijs;
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "bestellingidBestelling")
     private Collection<Bestelregel> bestelregelCollection;
     @JoinColumn(name = "Klant_id", referencedColumnName = "id")
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
-    @JsonbProperty("klantidKlant ")
+    @JsonbProperty("klantidKlant")
     private Klant klantidKlant;
 
     public Bestelling() {

@@ -10,6 +10,8 @@ import javax.json.bind.annotation.JsonbProperty;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,7 +64,7 @@ public class Adres implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    @JsonbProperty("id ")
+    @JsonbProperty("id")
     private Integer id;
     @Size(max = 45)
     @Column(name = "straatnaam")
@@ -84,12 +86,14 @@ public class Adres implements Serializable {
     @Column(name = "woonplaats")
     @JsonbProperty("woonplaats")
     private String woonplaats;
-//    @Enumerated(EnumType.STRING)
-//    @Size(max = 15)
-//    @Column(name = "Adrestype")
-//    private AdresType adrestype;
+    @Enumerated(EnumType.STRING)
+    @Size(max = 15)
+    @Column(name = "Adrestype")
+    @JsonbProperty("Adrestype")
+    private AdresType adrestype;
     @JoinColumn(name = "Klant_idKlant", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonbProperty("klantidKlant")
     private Klant klantidKlant;
 
     public Adres() {
@@ -147,16 +151,16 @@ public class Adres implements Serializable {
         this.woonplaats = woonplaats;
     }
 
-//    @XmlTransient
-//    @JsonbTransient
-//    public AdresType getAdrestype() {
-//        return adrestype;
-//    }
-//
-//    public void setAdrestype(AdresType adrestype) {
-//        this.adrestype = adrestype;
-//    }
-    @JsonbProperty("klantidKlant")
+   
+    
+    public AdresType getAdrestype() {
+        return adrestype;
+    }
+
+    public void setAdrestype(AdresType adrestype) {
+        this.adrestype = adrestype;
+    }
+  
     public Klant getKlantidKlant() {
         return klantidKlant;
     }

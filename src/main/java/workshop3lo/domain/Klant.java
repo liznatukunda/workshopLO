@@ -47,23 +47,23 @@ public class Klant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    @JsonbProperty("id ")
+    @JsonbProperty("id")
     private Integer id;
     @Size(max = 45)
     @Column(name = "voornaam")
-    @JsonbProperty("voornaam ")
+    @JsonbProperty("voornaam")
     private String voornaam;
     @Size(max = 45)
     @Column(name = "tussenvoegsel")
-    @JsonbProperty("tussenvoegsel ")
+    @JsonbProperty("tussenvoegsel")
     private String tussenvoegsel;
     @Size(max = 45)
     @Column(name = "achternaam")
-    @JsonbProperty("achternaam ")
+    @JsonbProperty("achternaam")
     private String achternaam;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
-    @JsonbProperty("accountId ")
+    @JsonbProperty("accountId")
     private Account accountId;
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "klantidKlant")
     private Collection<Bestelling> bestellingCollection;
