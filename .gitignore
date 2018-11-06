@@ -24,5 +24,3 @@
 hs_err_pid*
 /target/
 /src/main/resources/application.properties
-/src/main/webapp/WEB-INF/glassfish-resources.xml
-/src/main/setup/glassfish-resources
