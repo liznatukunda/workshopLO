@@ -63,7 +63,7 @@ public class Adres implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "adres_id")
     @JsonbProperty("id")
     private Integer id;
     @Size(max = 45)
@@ -87,11 +87,10 @@ public class Adres implements Serializable {
     @JsonbProperty("woonplaats")
     private String woonplaats;
     @Enumerated(EnumType.STRING)
-    @Size(max = 15)
-    @Column(name = "Adrestype")
+    @Column(name = "adres_type")
     @JsonbProperty("Adrestype")
     private AdresType adrestype;
-    @JoinColumn(name = "Klant_idKlant", referencedColumnName = "id")
+    @JoinColumn(name = "klant_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @JsonbProperty("klantidKlant")
     private Klant klantidKlant;
