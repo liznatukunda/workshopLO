@@ -5,6 +5,7 @@
  */
 package resources;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -18,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import sessions.BestelregelFacade;
+import workshop3lo.domain.Bestelling;
 import workshop3lo.domain.Bestelregel;
 
 /**
@@ -81,6 +83,14 @@ public class BestelregelFacadeREST {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(dao.count());
+    }
+    
+     @GET
+    @Path("search/{id}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List <Bestelregel> findByBestelling(@PathParam("id") Integer bestelling) {
+        
+        return dao.findByBestelling(bestelling);
     }
 
 //     @GET

@@ -54,7 +54,7 @@ public class Bestelregel implements Serializable {
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JsonbProperty("artikelidArtikel")
     private Artikel artikelidArtikel;
-    @JoinColumn(name = "Bestelling_id", referencedColumnName = "id")
+    @JoinColumn(name = "bestelling_id", referencedColumnName = "id")
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JsonbProperty("bestellingidBestelling")
     private Bestelling bestellingidBestelling;

@@ -88,7 +88,7 @@ public class Adres implements Serializable {
     private String woonplaats;
     @Enumerated(EnumType.STRING)
     @Column(name = "adres_type")
-    @JsonbProperty("Adrestype")
+    @JsonbProperty("adresType")
     private AdresType adrestype;
     @JoinColumn(name = "klant_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
