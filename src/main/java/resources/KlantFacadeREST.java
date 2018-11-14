@@ -83,6 +83,14 @@ public class KlantFacadeREST {
     public String countREST() {
         return String.valueOf(dao.count());
     }
+    
+    @GET
+    @Path("search/{accountid}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public Klant findByAccountId(@PathParam("accountid") Integer accountId) {
+        
+        return dao.findByAccountId(accountId);
+    }
 
 //        @GET
 //    @Path("search/{query}")

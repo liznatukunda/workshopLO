@@ -82,6 +82,14 @@ public class AdresFacadeREST {
     public String countREST() {
         return String.valueOf(dao.count());
     }
+    
+    @GET
+    @Path("search/{klantid}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List <Adres> findByBestelling(@PathParam("klantid") Integer klantId) {
+        
+        return dao.findByKlant(klantId);
+    }
 
 //     @GET
 //    @Path("search/{query}")
