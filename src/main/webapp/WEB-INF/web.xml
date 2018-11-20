@@ -23,7 +23,7 @@
     
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/index</url-pattern>
+        <url-pattern>/resources/webSecurity/LoginServlet</url-pattern>
         <!--enter the URL for the login.html<url-pattern>/</url-pattern>-->
     </servlet-mapping>
 </web-app>
