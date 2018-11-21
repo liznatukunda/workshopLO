@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import sessions.AccountFacade;
 import workshop3lo.domain.Account;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -39,6 +40,7 @@ public class AccountFacadeREST  {
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Account entity) {
+        entity.setPassword(BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12)));
         dao.create(entity);
     }
 
@@ -46,6 +48,7 @@ public class AccountFacadeREST  {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Account entity) {
+        entity.setPassword(BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12)));
         dao.edit(entity);
     }
 
