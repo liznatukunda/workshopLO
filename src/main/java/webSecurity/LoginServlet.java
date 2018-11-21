@@ -27,6 +27,24 @@ public class LoginServlet extends HttpServlet {
 
     @EJB
     private AccountFacade accountDao;
+    private boolean error=false;
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+         Map<String, String> data = new HashMap<>();
+        if (error){    
+        
+                    data.put("error", "true");
+
+        }
+        else {
+            data.put("error", "false");
+        }
+        String json = new Gson().toJson(data);
+
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
+    }
 
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +66,7 @@ public class LoginServlet extends HttpServlet {
         String pwd = sb.toString().substring(sb.toString().lastIndexOf('=') + 1, sb.length() - 1);
 
         Account account = accountDao.findByName(user);
-        
+
         try {
             if (BCrypt.checkpw(pwd, account.getPassword())) {
                 /*HttpSession session = request.getSession();
@@ -58,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 			Cookie userName = new Cookie("user", user);
 			userName.setMaxAge(30*60);
 			response.addCookie(userName);*/
-                
+
                 if (account.getRol().equals(Account.Rol.klant)) {
                     Cookie cookieRol = new Cookie("rol", "klant");
                     cookieRol.setMaxAge(30 * 60);
@@ -70,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 
                     Map<String, String> data = new HashMap<>();
                     data.put("redirect", "http://localhost:8080/workshopLOClient/view/klantpage.html");
-                    
+
                     String json = new Gson().toJson(data);
 
                     response.setContentType("application/json");
@@ -81,10 +99,10 @@ public class LoginServlet extends HttpServlet {
                     Cookie cookieRol = new Cookie("rol", "geenKlant");
                     cookieRol.setMaxAge(30 * 60);
                     response.addCookie(cookieRol);
-                    
+
                     Map<String, String> data = new HashMap<>();
                     data.put("redirect", "http://localhost:8080/workshopLOClient/view/mainpage.html");
-                    
+
                     String json = new Gson().toJson(data);
 
                     response.setContentType("application/json");
@@ -95,21 +113,39 @@ public class LoginServlet extends HttpServlet {
                 //RequestDispatcher rs = request.getRequestDispatcher("Welcome");
                 //rs.forward(request, response);
             } else {
-                /*RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-			PrintWriter out= response.getWriter();
-			out.println("<font color=red>Either user name or password is wrong.</font>");
-			rd.include(request, response);*/
+                error=true;
+                /*Map<String, String> data = new HashMap<>();
+                    data.put("", "true");
 
- /*PrintWriter out = response.getWriter();
+                    String json = new Gson().toJson(data);
+
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
+                
+                /*RequestDispatcher rd = getServletContext().getRequestDispatcher("localhost:8080/workshopLOClient/view/login.html");
+                PrintWriter out = response.getWriter();
+                out.println("<script>\n"
+                        + "        function display(){\n"
+                        + "            document.getElementById(\"error\").style.display='block';\n"
+                        + "        }\n"
+                        + "        </script>");
+                rd.include(request, response);
+                        /*PrintWriter out = response.getWriter();
                 out.println("<font color=red>username and/or password incorrect</font>");
                 RequestDispatcher rs = request.getRequestDispatcher("http://localhost:8080/workshopLOClient/view/login.html");
                 rs.include(request, response);*/
             }
         } catch (NullPointerException e) {
-            PrintWriter out = response.getWriter();
-            out.println("<font color=red>username and/or password incorrect</font>");
-            RequestDispatcher rs = request.getRequestDispatcher("index.html");
-            rs.include(request, response);
+            error=true;
+            /*RequestDispatcher rd = getServletContext().getRequestDispatcher("/workshopLOClient/view/login.html");
+                PrintWriter out = response.getWriter();
+                out.println("<script>\n"
+                        + "        function display(){\n"
+                        + "            document.getElementById(\"error\").style.display='block';\n"
+                        + "        }\n"
+                        + "        </script>");
+                rd.include(request, response);*/
         }
 
     }
